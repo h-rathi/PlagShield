@@ -1,5 +1,4 @@
 version: '3.8'
-
 services:
   client:
     build:
@@ -9,8 +8,6 @@ services:
       - "3000:80"
     depends_on:
       - server
-    networks:
-      - plagshield-net
 
   server:
     build:
@@ -22,8 +19,6 @@ services:
       - MONGO_URI=mongodb://mongo:27017/plagshield
     depends_on:
       - mongo
-    networks:
-      - plagshield-net
 
   mongo:
     image: mongo:6
@@ -31,12 +26,6 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
-    networks:
-      - plagshield-net
 
 volumes:
   mongo-data:
-
-networks:
-  plagshield-net:
-    driver: bridge
